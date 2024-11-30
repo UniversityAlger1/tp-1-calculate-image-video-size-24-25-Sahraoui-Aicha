@@ -11,36 +11,30 @@
 // Return value
 //   colored video size (based on the unit passed parameter)
 float video(int w, int h, int durationMovie, int durationCredits, int fps, char* unit) {
-    // Bits per pixel for colored image (24 bits)
-    float bitsPerPixel = 24;
+    // Use double for higher precision
+    double bitsPerPixelColor = 24.0;
+    double bitsPerPixelBW = 8.0;
 
-    // Calculate the size of the colored part of the video in bits
-    float clrImage = w * h * bitsPerPixel * durationMovie * fps;
-    
-    // Calculate the size of the black/white part of the video (assumed to be 8 bits per pixel for grayscale)
-    float BImage = w * h * 8 * durationCredits * fps;
+    // Calculate size in bits for each part
+    double clrImage = (double)w * h * bitsPerPixelColor * durationMovie * fps;
+    double BImage = (double)w * h * bitsPerPixelBW * durationCredits * fps;
 
-    // Total size in bits (colored + black/white parts)
-    float sizeInBits = clrImage + BImage;
-
-    // Variable to hold the size in the requested unit
-    float size;
+    // Total size in bits
+    double sizeInBits = clrImage + BImage;
 
     // Convert size based on the requested unit
+    double size = -1.0; // Default error value
+
     if (strcmp(unit, "bt") == 0) {
-        size = sizeInBits / 8; // Convert to bytes
+        size = sizeInBits / 8.0; // Convert to bytes
     } else if (strcmp(unit, "ko") == 0) {
-        size = sizeInBits / (1024 * 8); // Convert to kilobits
+        size = sizeInBits / (8.0 * 1024.0); // Convert to kilobytes
     } else if (strcmp(unit, "mo") == 0) {
-        size = sizeInBits / (1024 * 1024 * 8); // Convert to megabits
+        size = sizeInBits / (8.0 * 1024.0 * 1024.0); // Convert to megabytes
     } else if (strcmp(unit, "go") == 0) {
-        size = sizeInBits / (1024 * 1024 * 1024 * 8); // Convert to gigabits
-    } else {
-        // If the unit is not recognized, return -1 or some error value
-        return -1.0f;
+        size = sizeInBits / (8.0 * 1024.0 * 1024.0 * 1024.0); // Convert to gigabytes
     }
 
-    // Return the calculated size
     return size;
 }
 

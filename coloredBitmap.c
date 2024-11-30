@@ -1,10 +1,11 @@
+#include <stdio.h>
 #include <string.h>
 #include "config/coloredBitmap.h"
 
 // Parameters:
 //   w: width of the image
 //   h: height of the image
-//   unit: Unit of the output value. It could be 'bt' for bits, 'ko' for kilobits, 'mo' for megabits, 'go' for gigabits
+//   unit: Unit of the output value. It could be 'bt' for bits, 'ko' for kilobytes, 'mo' for megabytes, 'go' for gigabytes
 // Return value
 //   colored image size Bitmap (based on the unit passed parameter)
 float coloredBitmap(int w, int h, char* unit) {
@@ -21,16 +22,18 @@ float coloredBitmap(int w, int h, char* unit) {
     if (strcmp(unit, "bt") == 0) {
         size = sizeInBits; // Size in bits
     } else if (strcmp(unit, "ko") == 0) {
-        size = sizeInBits / 1024; // Convert to kilobits
+        size = sizeInBits / 8 / 1024; // Convert to kilobytes
     } else if (strcmp(unit, "mo") == 0) {
-        size = sizeInBits / (1024 * 1024); // Convert to megabits
+        size = sizeInBits / 8 / (1024 * 1024); // Convert to megabytes
     } else if (strcmp(unit, "go") == 0) {
-        size = sizeInBits / (1024 * 1024 * 1024); // Convert to gigabits
+        size = sizeInBits / 8 / (1024 * 1024 * 1024); // Convert to gigabytes
     } else {
         // If the unit is not recognized, return -1 or some error value
         return -1.0f;
     }
 
-    // Return the size in the requested unit (in bits, kilobits, megabits, or gigabits)
+    
     return size;
 }
+
+
