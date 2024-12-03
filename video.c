@@ -43,7 +43,7 @@ float video(int w, int h, int durationMovie, int durationCredits, int fps, char*
     }
 
     // Return rounded result
-    return round(size * 1000000.0) / 1000000.0; // Round to 6 decimal places
+    return size ;
 }
 
 
