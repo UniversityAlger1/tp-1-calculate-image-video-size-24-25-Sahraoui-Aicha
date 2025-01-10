@@ -25,13 +25,10 @@ float video(int w, int h, int durationMovie, int durationCredits, int fps, char*
     // Total size in bits
     double sizeInBits = clrImage + BImage;
 
-    // Debug output
-    printf("Debug: clrImage (bits): %.6f\n", clrImage);
-    printf("Debug: BImage (bits): %.6f\n", BImage);
-    printf("Debug: sizeInBits: %.6f\n", sizeInBits);
+    
 
     // Convert size based on the requested unit
-    double size = -1.0; // Default error value
+    double size ; // Default error value
     if (strcmp(unit, "bt") == 0) {
         size = sizeInBits / 8.0; // Convert to bytes
     } else if (strcmp(unit, "ko") == 0) {
