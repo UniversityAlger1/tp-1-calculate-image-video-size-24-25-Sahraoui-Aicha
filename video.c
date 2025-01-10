@@ -16,7 +16,7 @@
 float video(int w, int h, int durationMovie, int durationCredits, int fps, char* unit) {
     // Use double for higher precision
     double bitsPerPixelColor = 24.0;
-    double bitsPerPixelBW = 8.0;
+    double bitsPerPixelBW = 1.0;
 
     // Calculate size in bits for each part
     double clrImage = (double)w * h * bitsPerPixelColor * durationMovie * fps;
